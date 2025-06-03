@@ -1,0 +1,358 @@
+index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sarthi</title>
+  <style>
+    :root {
+      --primary-color: #e91e63;
+      --card-bg: #ffffff;
+      --bg-color: #f7f7f7;
+      --text-color: #333;
+      --border-radius: 12px;
+      --shadow: 0 4px 8px rgba(0,0,0,0.1);
+      --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1, h2 {
+      color: var(--primary-color);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-top: 30px;
+    }
+
+    form {
+      background-color: var(--card-bg);
+      padding: 30px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-light);
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: var(--text-color);
+    }
+
+    input[type="text"] {
+      padding: 12px;
+      width: 100%;
+      margin-bottom: 20px;
+      border: 2px solid #ddd;
+      border-radius: var(--border-radius);
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+
+    input[type="submit"] {
+      padding: 12px 30px;
+      width: 100%;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #c2185b;
+      transform: translateY(-2px);
+    }
+
+    .use-case {
+      background-color: var(--card-bg);
+      padding: 30px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-light);
+      margin-bottom: 30px;
+    }
+
+    .use-case p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+      padding: 20px 0;
+      overflow: hidden;
+    }
+
+    .card-carousel {
+      display: flex;
+      gap: 20px;
+      padding: 0 10px;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .card {
+      flex: 0 0 300px;
+      background-color: var(--card-bg);
+      padding: 25px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      opacity: 0.7;
+      transform: scale(0.95);
+      transition: all 0.4s ease;
+      border: 2px solid transparent;
+    }
+
+    .card.active {
+      opacity: 1;
+      transform: scale(1);
+      border-color: var(--primary-color);
+      box-shadow: 0 6px 20px rgba(233, 30, 99, 0.2);
+    }
+
+    .card h3 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Navigation dots */
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #ccc;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .dot.active {
+      background-color: var(--primary-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 15px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      form, .use-case {
+        padding: 20px;
+      }
+
+      .card {
+        flex: 0 0 280px;
+        padding: 20px;
+      }
+
+      .carousel-wrapper {
+        padding: 15px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+
+      .container {
+        padding: 0;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      form, .use-case {
+        padding: 15px;
+      }
+
+      .card {
+        flex: 0 0 250px;
+        padding: 15px;
+      }
+
+      .card h3 {
+        font-size: 1.1rem;
+      }
+
+      .card p {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Accessibility improvements */
+    @media (prefers-reduced-motion: reduce) {
+      .card-carousel,
+      .card,
+      input[type="submit"] {
+        transition: none;
+      }
+    }
+
+    /* Focus styles for accessibility */
+    .dot:focus {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to Sarthi</h1>
+    
+    <form method="POST" action="/submit">
+      <label for="machine_code">Enter Machine Code:</label>
+      <input type="text" id="machine_code" name="machine_code" required placeholder="Enter your machine code here" />
+      <input type="submit" value="Submit" />
+    </form>
+
+    <div class="use-case">
+      <h2>Use Case of Menstrual Products</h2>
+      <p>
+        Menstrual products such as sanitary pads, tampons, and menstrual cups are essential for
+        maintaining hygiene and dignity during menstruation. These products help prevent infections,
+        reduce discomfort, and support participation in daily activities, school, and work.
+      </p>
+    </div>
+
+    <h2>Menstrual Product Benefits</h2>
+    <div class="carousel-wrapper">
+      <div class="card-carousel" id="carousel">
+        <div class="card active">
+          <h3>Sanitary Pads</h3>
+          <p>Easy to use, widely available, and great for beginners. Disposable and hygienic option for everyday comfort.</p>
+        </div>
+        <div class="card">
+          <h3>Menstrual Cups</h3>
+          <p>Eco-friendly, reusable for years, and cost-effective. Can be worn for up to 12 hours safely.</p>
+        </div>
+        <div class="card">
+          <h3>Tampons</h3>
+          <p>Discreet, excellent for physical activities, and available in various absorbencies for different flow levels.</p>
+        </div>
+        <div class="card">
+          <h3>Reusable Cloth Pads</h3>
+          <p>Environmentally sustainable, reusable for years, gentle on skin, and customizable for comfort.</p>
+        </div>
+        <div class="card">
+          <h3>Period Panties</h3>
+          <p>Built-in absorbency, comfortable all-day wear, reusable, and ideal for light to medium flow days.</p>
+        </div>
+      </div>
+      
+      <div class="carousel-dots" id="dots">
+        <span class="dot active" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+        <span class="dot" onclick="currentSlide(5)"></span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const carousel = document.getElementById('carousel');
+    const cards = carousel.querySelectorAll('.card');
+    const dots = document.querySelectorAll('.dot');
+    let currentIndex = 0;
+
+    function updateCarousel() {
+      // Remove active class from all cards and dots
+      cards.forEach(card => card.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
+
+      // Add active class to current card and dot
+      cards[currentIndex].classList.add('active');
+      dots[currentIndex].classList.add('active');
+
+      // Calculate the transform value to center the active card
+      const cardWidth = cards[0].offsetWidth + 20; // card width + gap
+      const containerWidth = carousel.parentElement.offsetWidth;
+      const offset = (containerWidth / 2) - (cardWidth / 2) - (currentIndex * cardWidth);
+      
+      carousel.style.transform = translateX(${offset}px);
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % cards.length;
+      updateCarousel();
+    }
+
+    function currentSlide(index) {
+      currentIndex = index - 1;
+      updateCarousel();
+    }
+
+    // Initialize carousel
+    updateCarousel();
+
+    // Auto-slide every 4 seconds
+    setInterval(nextSlide, 4000);
+
+    // Handle window resize
+    window.addEventListener('resize', updateCarousel);
+  </script>
+</body>
+</html>

@@ -1,0 +1,465 @@
+machine.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine {{ machine_id }}</title>
+    <style>
+        :root {
+            --primary-color: #e91e63;
+            --primary-hover: #c2185b;
+            --card-bg: #ffffff;
+            --bg-color: #f7f7f7;
+            --text-color: #333;
+            --border-radius: 12px;
+            --shadow: 0 4px 8px rgba(0,0,0,0.1);
+            --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
+            --border-color: #ddd;
+            --table-header-bg: #fce4ec;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1, h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 30px;
+        }
+
+        .machine-info, .product-table, .submit-section {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            margin-bottom: 25px;
+        }
+
+        .machine-info p {
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+
+        .machine-info strong {
+            color: var(--primary-color);
+        }
+
+        /* Table Styles */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: -10px;
+            padding: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 400px;
+        }
+
+        th, td {
+            padding: 15px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--table-header-bg);
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        td {
+            font-size: 0.95rem;
+        }
+
+        tr:hover {
+            background-color: #fafafa;
+        }
+
+        /* Input Styles */
+        input[type="number"] {
+            width: 70px;
+            padding: 8px 10px;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            text-align: center;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        /* Button Styles */
+        button {
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .submit-section {
+            text-align: center;
+        }
+
+        #response-message {
+            margin-top: 15px;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 6px;
+            min-height: 20px;
+        }
+
+        #response-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        #response-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--primary-color);
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--primary-color);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .machine-info, .product-table, .submit-section {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+
+            th, td {
+                padding: 12px 8px;
+                font-size: 0.9rem;
+            }
+
+            input[type="number"] {
+                width: 60px;
+                padding: 6px 8px;
+                font-size: 13px;
+            }
+
+            button {
+                padding: 12px 25px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+                margin-top: 20px;
+            }
+
+            .machine-info, .product-table, .submit-section {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .machine-info p {
+                font-size: 1rem;
+            }
+
+            th, td {
+                padding: 10px 6px;
+                font-size: 0.85rem;
+            }
+
+            th {
+                font-size: 0.9rem;
+            }
+
+            input[type="number"] {
+                width: 55px;
+                padding: 5px 6px;
+                font-size: 12px;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .table-wrapper {
+                margin: -5px;
+                padding: 5px;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 320px) {
+            .machine-info, .product-table, .submit-section {
+                padding: 12px;
+            }
+
+            th, td {
+                padding: 8px 4px;
+            }
+
+            input[type="number"] {
+                width: 50px;
+                padding: 4px;
+            }
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            button,
+            input[type="number"],
+            .loading::after {
+                transition: none;
+                animation: none;
+            }
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            :root {
+                --border-color: #000;
+                --shadow: 0 2px 4px rgba(0,0,0,0.3);
+            }
+        }
+
+        /* Focus styles for accessibility */
+        button:focus,
+        input:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Machine Information</h1>
+        <div id="machine-data" class="machine-info loading">Loading machine data...</div>
+
+        <h2>Available Products</h2>
+        <div class="product-table">
+            <div class="table-wrapper">
+                <table id="product-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price (₹)</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Filled dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="submit-section">
+            <button onclick="submitOrder()" id="submit-btn">Submit Order</button>
+            <div id="response-message"></div>
+        </div>
+    </div>
+
+    <script>
+        const machineId = "{{ machine_id }}";
+
+        fetch(/${machineId})
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('machine-data').innerHTML = <p style="color: var(--primary-color); text-align: center;">${data.error}</p>;
+                    document.getElementById('machine-data').classList.remove('loading');
+                    return;
+                }
+
+                document.getElementById('machine-data').innerHTML = `
+                    <p><strong>Machine ID:</strong> ${data.machine_id}</p>
+                    <p><strong>Location:</strong> ${data.machine_address}</p>
+                `;
+                document.getElementById('machine-data').classList.remove('loading');
+
+                let products = {};
+                try {
+                    products = JSON.parse(data.machine_products.replace(/'/g, '"'));
+                } catch (e) {
+                    console.error("Failed to parse products:", e);
+                }
+
+                const tableBody = document.querySelector("#product-table tbody");
+                for (let product in products) {
+                    const price = products[product];
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td><strong>${product}</strong></td>
+                        <td>₹${price}</td>
+                        <td><input type="number" min="0" max="99" value="0" data-product="${product}" aria-label="Quantity for ${product}"></td>
+                    `;
+                    tableBody.appendChild(row);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching machine data:', error);
+                document.getElementById('machine-data').innerHTML = '<p style="color: #721c24; text-align: center;">Failed to load machine data. Please try again.</p>';
+                document.getElementById('machine-data').classList.remove('loading');
+            });
+
+        function submitOrder() {
+            const inputs = document.querySelectorAll('input[type="number"]');
+            const order = {};
+            const responseMessage = document.getElementById('response-message');
+            const submitBtn = document.getElementById('submit-btn');
+
+            inputs.forEach(input => {
+                const qty = parseInt(input.value);
+                if (qty > 0) {
+                    const product = input.getAttribute("data-product");
+                    order[product] = qty;
+                }
+            });
+
+            if (Object.keys(order).length === 0) {
+                responseMessage.textContent = "Please select at least one item.";
+                responseMessage.className = "error";
+                return;
+            }
+
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Processing...";
+            responseMessage.textContent = "";
+            responseMessage.className = "";
+
+            fetch('/purchase', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    machine_id: machineId,
+                    order: order
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = /payment;
+            })
+            .catch(error => {
+                responseMessage.textContent = "Failed to submit order. Please try again.";
+                responseMessage.className = "error";
+                console.error("Submission error:", error);
+            })
+            .finally(() => {
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Submit Order";
+            });
+        }
+
+        // Add input validation
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('input', function(e) {
+                if (e.target.type === 'number') {
+                    const value = parseInt(e.target.value);
+                    if (value < 0) e.target.value = 0;
+                    if (value > 99) e.target.value = 99;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
