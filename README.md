@@ -1,50 +1,125 @@
-# Welcome to your Expo app 👋
+# Saarthi - Healthcare Products Payment System
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Overview
+Saarthi is a comprehensive healthcare products management and payment system that combines a React Native mobile application with a Python-based payment processing backend. The system is designed to facilitate easy access to essential healthcare products while providing a seamless payment experience.
 
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+## Project Structure
+```
+saarthi/
+├── my-app/                 # React Native Mobile Application
+│   ├── assets/            # Images, fonts, and other static assets
+│   ├── components/        # Reusable React components
+│   ├── expo-router/       # Expo routing configuration
+│   └── package.json       # Node dependencies and scripts
+├── server/                # Backend server files
+├── main.py               # Python backend for payment processing
+└── transactions.db       # SQLite database for transaction records
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Features
 
-## Learn more
+### Mobile Application (React Native)
+- Modern UI with Expo Router navigation
+- Camera integration for QR code scanning
+- Real-time payment status updates
+- Responsive design with native components
+- Blur effects and haptic feedback
+- Cross-platform support (iOS & Android)
 
-To learn more about developing your project with Expo, look at the following resources:
+### Backend System (Python)
+- Razorpay payment integration
+- QR code generation for payments
+- Real-time payment status tracking
+- Transaction history management
+- Admin dashboard with analytics
+- Secure payment processing
+- SQLite database for transaction storage
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Tech Stack
 
-## Join the community
+### Frontend (Mobile App)
+- React Native
+- Expo Framework
+- TypeScript
+- React Navigation
+- Native UI Components
 
-Join our community of developers creating universal apps.
+### Backend
+- Python
+- SQLite
+- Razorpay API
+- Tkinter (Admin UI)
+- Matplotlib (Analytics)
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Setup Instructions
+
+### Mobile App Setup
+1. Navigate to the my-app directory:
+   ```bash
+   cd my-app
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install --legacy-peer-deps
+   ```
+
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+
+### Backend Setup
+1. Install Python dependencies:
+   ```bash
+   pip install requests pillow qrcode python-dotenv matplotlib
+   ```
+
+2. Configure environment variables:
+   Create a `.env` file with:
+   ```
+   KEY_ID=your_razorpay_key_id
+   KEY_SECRET=your_razorpay_secret
+   EMAIL=your_email
+   NUMBER=your_phone_number
+   ```
+
+3. Run the backend server:
+   ```bash
+   python main.py
+   ```
+
+## Features in Detail
+
+### Payment Processing
+- QR code-based payment initiation
+- 120-second payment window
+- Real-time status updates
+- Transaction logging
+- Payment success notifications
+
+### Admin Dashboard
+- Transaction history viewing
+- Product-wise filtering
+- Analytics visualization
+- CSV export functionality
+- Secure admin access
+
+### Security Features
+- Environment variable protection
+- Admin password protection
+- Secure payment gateway integration
+- Database transaction logging
+
+## Contributing
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
+
+## License
+This project is proprietary and confidential.
+
+## Contact
+For support or queries, please contact the development team. 
