@@ -7,7 +7,7 @@ Saarthi is a comprehensive healthcare products management and payment system tha
 ```
 saarthi/
 ├── my-app/                 # React Native Mobile Application
-│   ├── assets/            # Images, fonts, and other static assets
+│   ├── assets/            # Images, fonts, and other static assets 
 │   ├── components/        # Reusable React components
 │   ├── expo-router/       # Expo routing configuration
 │   └── package.json       # Node dependencies and scripts
